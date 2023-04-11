@@ -1,11 +1,13 @@
 // user routes
 const express = require('express');
-const { getContarctDetails } = require('../controller/userController');
+const user = require('../controller/userController');
 const router = express.Router();
 
 // get =>
-router.get("/contract",getContarctDetails)
+router.get("/contract",user.getContarctDetails);
+router.get('/supportedNetworks',user.getContarctDetails);
 
 //post => api
+router.post("/verifyContract",user.verifyContract);
 
 module.exports = router;

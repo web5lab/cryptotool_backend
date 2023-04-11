@@ -1,3 +1,4 @@
+const { explorerValidator } = require("../Services/explorerVerification")
 const { getContarctData } = require("../Services/getContractDetails")
 const { contractController } = require("./contractController")
 
@@ -13,6 +14,18 @@ const getContarctDetails = async(req,res) => {
     res.json(data)
 }
 
+const getSupportedNetworks = async(req,res) => {
+
+}
+
+const verifyContract = async(req,res) => {
+    const tokenType = req.body.tokenType
+    const tokenAddress = req.body.tokenAddress
+    const data = await  explorerValidator(tokenType,tokenAddress);
+}
+
 module.exports ={
-    getContarctDetails
+    getContarctDetails,
+    verifyContract,
+    getSupportedNetworks
 }

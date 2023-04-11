@@ -16,7 +16,7 @@ async function verifyContract(apiKey, contractAddress, sourceCode, contractName,
         },{headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }});
-        console.log(response.data);
+       return response.data;
     } catch (error) {
         console.error(error);
     }
@@ -58,8 +58,8 @@ const optimizationUsed = 0; // or 0
 
 
 
-const explorerValidator = (contractAddress) =>{
- verifyContract(apiKey, contractAddress, sourceCode, contractName, compilerVersion, optimizationUsed);
+const explorerValidator = async(tokenType,contractAddress) =>{
+ await verifyContract(apiKey, contractAddress, sourceCode, contractName, compilerVersion, optimizationUsed);
 }
 
 module.exports={
