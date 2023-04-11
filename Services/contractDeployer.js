@@ -4,8 +4,10 @@ const Web3 = require('web3');
 
 
 const web3 = new Web3(new Web3.providers.HttpProvider('https://data-seed-prebsc-2-s1.binance.org:8545'));
-const contractABI = require('../contract/json/testnet/erc20.json')
-const {wallet,Bytecode} = require('../contract/config/config');
+const contractABI = require('../contract/json/testnet/erc20.json');
+const { wallet } = require('../config/config');
+
+
 
 
 const MyContract = new web3.eth.Contract(contractABI);
@@ -13,10 +15,11 @@ const MyContract = new web3.eth.Contract(contractABI);
 
 const account = web3.eth.accounts.wallet.add(wallet.privateKey);
 const senderAddress = account.address;
-const contractDeployer =async () => {
+const contractDeployer =async (bytecode,args) => {
     try {
        await MyContract.deploy({
-            data: Bytecode,
+            data: bytecode,
+            arguments: args
           }).send({
             from: senderAddress,
             gas: 1500000,
@@ -30,7 +33,9 @@ const contractDeployer =async () => {
     }
    
 }
-contractDeployer()
+module.exports ={
+  contractDeployer
+}
 
 
 

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const databaseConnection = require('./mongoDb/db')
 const cors = require('cors');
 const logErrors = require('./utils/logger')
+const userRoute= require('./routes/userRoutes');
 
 
 const app = express()
@@ -23,6 +24,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logErrors);
 app.use(cors({origin:'*'}))
 
+
+// routes use here
+app.use('/user',userRoute);
 
 
 

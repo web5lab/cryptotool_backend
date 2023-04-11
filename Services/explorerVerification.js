@@ -1,4 +1,6 @@
 const axios = require('axios');
+const { codeGenerator } = require('./customCodeGenerator');
+const { erc20Simple } = require('../contract/contract/testnet/erc20Simple/code');
 
 async function verifyContract(apiKey, contractAddress, sourceCode, contractName, compilerVersion, optimizationUsed, runs) {
     try {
@@ -47,8 +49,9 @@ const checkStatus = async () => {
   
 
 const apiKey = 'CXXU62N3137QBRVC41ZNZB2V5FE37TITWB';
-const sourceCode = `
-`;
+const sourceCode = await codeGenerator(erc20Simple,"shiv")
+console.log()
+
 const contractName = 'TestPay';
 const compilerVersion = 'v0.8.18+commit.87f61d96';
 const optimizationUsed = 0; // or 0
