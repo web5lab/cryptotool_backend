@@ -27,7 +27,7 @@ const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
 
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
-    const { path: filePath } = req.file;
+    const { path: filePath, originalname: fileName } = req.file;
 
     // Check if the file is an image
     const extension = path.extname(filePath).toLowerCase();
@@ -44,6 +44,22 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
     fs.writeFileSync(filePath, buffer);
     res.status(200).json({ message: 'File uploaded successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+});
+
+app.get('/download/:fileName', (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join(__dirname, 'media', fileName);
+
+  try {
+    if (fs.existsSync(filePath)) {
+      res.download(filePath, fileName);
+    } else {
+      res.status(404).json({ message: 'File not found' });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Something went wrong' });
