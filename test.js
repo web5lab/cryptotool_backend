@@ -11,26 +11,45 @@ const storage = multer.diskStorage({
     cb(null, 'media/');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, Date.now() + '-' + file.originalname);
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    // Allow any type of file
+    cb(null, true);
+  }
+});
 
-app.post('/upload', upload.single('image'), async (req, res) => {
+const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+
+app.post('/upload', upload.single('file'), async (req, res) => {
   try {
-    const { path: imagePath } = req.file;
-    const image = await sharp(imagePath)
-      .resize(200, 200)
-      .toBuffer();
-    fs.writeFileSync(imagePath, image);
-    res.status(200).json({ message: 'Image uploaded successfully' });
+    const { path: filePath } = req.file;
+
+    // Check if the file is an image
+    const extension = path.extname(filePath).toLowerCase();
+    const isImage = imageExtensions.includes(extension);
+
+    let buffer = null;
+    if (isImage) {
+      buffer = await sharp(filePath)
+        .resize(200, 200)
+        .toBuffer();
+    } else {
+      buffer = fs.readFileSync(filePath);
+    }
+
+    fs.writeFileSync(filePath, buffer);
+    res.status(200).json({ message: 'File uploaded successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Something went wrong' });
   }
 });
 
-app.listen(3012, () => {
+app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
