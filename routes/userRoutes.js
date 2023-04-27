@@ -5,6 +5,7 @@ const router = express.Router();
 
 // get =>
 router.get("/contract",user.getContarctDetails);
+// router.get("get-contract-deployment-details",user.)
 router.get('/supportedNetworks',user.getContarctDetails);
 
 //post => api

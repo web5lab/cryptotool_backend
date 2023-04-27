@@ -8,6 +8,9 @@ if (tokenType =="erc20Simple"){
   }
   return data;
 }
+return {
+  data:"invalid token"
+}
 }
 
 module.exports ={

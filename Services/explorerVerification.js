@@ -49,8 +49,8 @@ const checkStatus = async () => {
   
 
 const apiKey = 'CXXU62N3137QBRVC41ZNZB2V5FE37TITWB';
-const sourceCode = await codeGenerator(erc20Simple,"shiv")
-console.log()
+const sourceCode =  "shiv"
+
 
 const contractName = 'TestPay';
 const compilerVersion = 'v0.8.18+commit.87f61d96';

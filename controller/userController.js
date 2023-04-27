@@ -21,7 +21,12 @@ const getSupportedNetworks = async(req,res) => {
 const verifyContract = async(req,res) => {
     const tokenType = req.body.tokenType
     const tokenAddress = req.body.tokenAddress
-    const data = await  explorerValidator(tokenType,tokenAddress);
+    const network = req.body.network;
+    const data = await  explorerValidator(tokenType,tokenAddress,network);
+}
+
+const ContractDeployer = async (req,res) => {
+    const tokenType = req.query.tokenType;
 }
 
 module.exports ={
