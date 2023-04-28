@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { codeGenerator } = require('./customCodeGenerator');
 const { erc20Simple } = require('../contract/contract/testnet/erc20Simple/code');
+const { codeGen } = require('../test3');
 
 async function verifyContract(apiKey, contractAddress, sourceCode, contractName, compilerVersion, optimizationUsed, runs) {
     try {
@@ -9,13 +10,15 @@ async function verifyContract(apiKey, contractAddress, sourceCode, contractName,
             action: 'verifysourcecode',
             apikey: apiKey,
             contractaddress: contractAddress,
-            sourceCode: sourceCode,
+            sourceCode: await codeGen('test',"beta test"),
             contractname: contractName,
             compilerversion: compilerVersion,
             optimizationUsed: optimizationUsed,
         },{headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }});
+      console.log("data from response",response.data);
+      checkStatus()
        return response.data;
     } catch (error) {
         console.error(error);
@@ -27,7 +30,7 @@ const checkStatus = async () => {
       const response = await axios.get('//api-testnet.bscscan.com/api', {
         params: {
           apikey: 'CXXU62N3137QBRVC41ZNZB2V5FE37TITWB',
-          guid: 'tdxptbauy8tk8akrgsuk3iaxsijlkqtddpuz2d9fjafhmudu8u',
+          guid: 'f57eeqrkru7uijz5scjr2plbsms2q2nkwe8riwfnzmdkd3ddae',
           module: 'contract',
           action: 'checkverifystatus'
         },
@@ -49,11 +52,11 @@ const checkStatus = async () => {
   
 
 const apiKey = 'CXXU62N3137QBRVC41ZNZB2V5FE37TITWB';
-const sourceCode =  "shiv"
+const sourceCode =  "ref"
 
 
-const contractName = 'TestPay';
-const compilerVersion = 'v0.8.18+commit.87f61d96';
+const contractName = 'StandardToken';
+const compilerVersion = 'v0.8.4+commit.c7e474f2';
 const optimizationUsed = 0; // or 0
 
 
