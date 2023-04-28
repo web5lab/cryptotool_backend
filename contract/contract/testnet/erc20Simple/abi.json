@@ -3,13 +3,28 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "name_",
+				"name": "name",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "symbol_",
+				"name": "symbol",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSupply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "serviceFeeReceiver_",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "serviceFee_",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
