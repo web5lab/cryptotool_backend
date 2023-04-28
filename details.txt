@@ -1,0 +1,1 @@
+erc20 arguments => name , total supply, symbol
