@@ -9,8 +9,8 @@ async function verifyContract(apiKey, contractAddress, sourceCode, contractName,
             module: 'contract',
             action: 'verifysourcecode',
             apikey: apiKey,
-            contractaddress: contractAddress,
-            sourceCode: await codeGen('test',"beta test"),
+            contractaddress: "0x8e05e8cDBb3516314bcBA0D99acE7C4469668b64",
+            sourceCode: erc20Simple,
             contractname: contractName,
             compilerversion: compilerVersion,
             optimizationUsed: optimizationUsed,
@@ -30,7 +30,7 @@ const checkStatus = async () => {
       const response = await axios.get('//api-testnet.bscscan.com/api', {
         params: {
           apikey: 'CXXU62N3137QBRVC41ZNZB2V5FE37TITWB',
-          guid: 'f57eeqrkru7uijz5scjr2plbsms2q2nkwe8riwfnzmdkd3ddae',
+          guid: 'mmf1rvgfagbjvg1gcj9nbauy6csmsyavzwarzzpxgsqqyxja6s',
           module: 'contract',
           action: 'checkverifystatus'
         },
@@ -52,7 +52,7 @@ const checkStatus = async () => {
   
 
 const apiKey = 'CXXU62N3137QBRVC41ZNZB2V5FE37TITWB';
-const sourceCode =  "ref"
+const sourceCode =  ""
 
 
 const contractName = 'StandardToken';
