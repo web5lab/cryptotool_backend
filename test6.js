@@ -36,6 +36,7 @@ function compileSolidityCode(solidityCode) {
     },
   };
 
+  // test appication
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
 
   const bytecode = output.contracts['contract.sol']['testContract'].evm.bytecode.object;
