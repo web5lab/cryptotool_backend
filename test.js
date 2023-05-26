@@ -26,6 +26,7 @@ const upload = multer({
 const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
 
 app.post('/upload', upload.single('file'), async (req, res) => {
+  console.log(req.file);
   try {
     const { path: filePath, originalname: fileName } = req.file;
 
